@@ -128,3 +128,63 @@ En el repositorio local:
 bash
 Copiar código
 git branch -d master
+
+-----
+El error indica que el repositorio remoto ya tiene un historial de commits en la rama main que no coincide con tu repositorio local. Esto ocurre porque estás intentando sobrescribir el historial remoto sin haber sincronizado primero.
+
+Para solucionar este problema, puedes seguir los pasos que se indican a continuación según tus necesidades.
+
+Opción 1: Traer y Fusionar Cambios Remotos
+Si quieres integrar los cambios remotos en tu repositorio local antes de empujar:
+
+Descarga los cambios remotos:
+
+bash
+Copiar código
+git pull origin main --rebase
+Esto intentará aplicar tus cambios locales sobre los cambios remotos.
+
+Sube los cambios nuevamente:
+
+bash
+Copiar código
+git push -u origin main
+Opción 2: Sobrescribir el Repositorio Remoto
+Si no necesitas los cambios que están en el repositorio remoto y quieres sobrescribirlos con tu repositorio local:
+
+Fuerza el push:
+
+bash
+Copiar código
+git push -u origin main --force
+Esto sobrescribirá el historial remoto con el historial de tu repositorio local. Nota: Esta acción eliminará cualquier cambio remoto que no esté en tu repositorio local.
+
+Opción 3: Clonar Cambios Remotos (Si los Necesitas)
+Si decides conservar los cambios remotos y trabajar desde ahí:
+
+Descarga los archivos remotos:
+
+bash
+Copiar código
+git pull origin main
+Si hay conflictos, Git te pedirá que los resuelvas manualmente.
+
+Sube los cambios una vez resueltos:
+
+bash
+Copiar código
+git push -u origin main
+Opción 4: Verificar Conflictos
+Si no estás seguro de qué cambios remotos están causando el problema, revisa el historial remoto:
+
+Verifica el historial remoto:
+
+bash
+Copiar código
+git log origin/main
+Compara con el historial local:
+
+bash
+Copiar código
+git log
+Esto te permitirá entender las diferencias entre los repositorios antes de decidir qué acción tomar.
