@@ -64,3 +64,67 @@ git commit -m "Descripción de los cambios realizados"
 Sube los cambios a GitHub:
 
 git push
+-----
+ERRORES COMUNIES
+1. Asegúrate de que el Repositorio Local Está Conectado al Remoto
+Verifica si el repositorio remoto (origin) está configurado correctamente:
+
+bash
+Copiar código
+git remote -v
+Deberías ver algo como esto:
+
+perl
+Copiar código
+origin  https://github.com/usuario/repositorio.git (fetch)
+origin  https://github.com/usuario/repositorio.git (push)
+Si no aparece, agrega el repositorio remoto:
+
+bash
+Copiar código
+git remote add origin https://github.com/usuario/repositorio.git
+2. Verifica si la Rama main Existe
+Si estás intentando renombrar la rama actual a main, asegúrate de estar en la rama correcta:
+
+bash
+Copiar código
+git branch
+Si estás en otra rama (por ejemplo, master), cámbiala antes de renombrarla:
+
+bash
+Copiar código
+git checkout master
+git branch -M main
+3. Subir la Nueva Rama al Remoto
+Una vez que la rama main esté configurada, súbela al repositorio remoto con:
+
+bash
+Copiar código
+git push -u origin main
+4. Cambiar la Rama Predeterminada en GitHub (Si Aplica)
+Si el repositorio remoto está en GitHub y su rama predeterminada es master, necesitas cambiarla manualmente a main en la configuración del repositorio:
+
+Ve a tu repositorio en GitHub.
+Haz clic en Settings > Branches.
+Cambia la rama predeterminada a main.
+5. Forzar la Creación de la Rama main Remota
+Si los pasos anteriores no funcionan, fuerza la creación de la rama remota con:
+
+bash
+Copiar código
+git push origin HEAD:main
+Esto crea la rama main en el remoto, incluso si no existía.
+
+6. Eliminar Conflictos con la Rama master (Opcional)
+Si la rama master existe tanto en local como en remoto y ya no la necesitas, elimínala:
+
+En el repositorio remoto:
+
+bash
+Copiar código
+git push origin --delete master
+En el repositorio local:
+
+bash
+Copiar código
+git branch -d master
